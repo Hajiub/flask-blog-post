@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Home</title>
+{% endblock head %}
+{% block content %}
+    {% if posts_list %}
+    {% for post in posts_list %}
+    <div class="post">
+        <h2>{{ post.username }}</h2>
+        <p class="email">{{ post.email }}</p>
+        <p>{{ post.content }}</p>
+        <p>{{ post.created_at }}</p>
+        <img src="{{ url_for('static', filename='img/' ~ post.picture) }}" alt="Logo">
+        <a href="{{ url_for('main.delete', post_id=post.id) }}" class="delete-link">Delete</a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>No post are available post something <a href="{{ url_for('main.post') }}">Here<p>
+    {% endif %}
+{% endblock content %}
